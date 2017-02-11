@@ -8,8 +8,10 @@ A short description can also be accessed directly from the gogo shell by typing 
 
 | Command | Description | Parameters |
 |:--------------|:----------------------------|:-----------------|
+| channels | Shows a list of all configured channel ids | - |
 | config | Shows the actual OpenMUC configuration | - |
 | drivers | Shows the ids of all running OpenMUC drivers | - |
+| read | Reads the value of the specified channel | `<channelId>` |
 | scanForChannels | Scans for channels of a specific device | `<deviceAddress> [<settings>]` |
 | scanForDevices | Scans for devices with a specific driver | `<driverId> [<settings>]` |
 
