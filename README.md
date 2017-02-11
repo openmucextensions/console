@@ -1,5 +1,5 @@
 # OpenMUC Console Commands
-Apache Felix Gogo console commands for accessing OpenMUC. The commands allow to scan for devices and channels as well as read and write values.
+Apache Felix Gogo console commands for accessing OpenMUC. The commands allow to scan for devices and channels as well as read and write values. The component needs at least OpenMUC framework version 0.16.0.
 
 ## Usage
 This bundle extends the Felix Gogo shell with commands that allow to access OpenMUC functionality. Details about using the shell
