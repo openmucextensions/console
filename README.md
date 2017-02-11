@@ -21,3 +21,30 @@ A short description can also be accessed directly from the gogo shell by typing 
 
 Please note that parameters like settings may be driver or device specific. As the channels configuration may
 be set in the `channels.xml` file, no commands for editing the configuration (e.g. adding a device) are included.
+
+## How to implement own Gogo commands
+A good tutorial for implementing own Gogo commands can be found [at this website](http://coders-kitchen.com/2012/04/06/tutorial-an-own-gogo-shell-command/). If OSGi's [declarative services](http://blog.vogella.com/2016/06/21/getting-started-with-osgi-declarative-services/) should be used, the neccessary properties `osgi.command.scope` and `osgi.command.function` must be set in the component description XML file like in the following example:
+
+```xml
+<property name="osgi.command.scope" type="String" value="openmuc"/>
+<property name="osgi.command.function">
+channels
+config
+drivers
+read
+scanForChannels
+scanForDevices
+write
+</property>
+```
+
+The property `osgi.command.function` declares the provided commands of the service component as an array of strings. The implementation function names *must* match the declared function names. As an example, the full component definition of this project can be found [here](https://github.com/openmucextensions/console/blob/master/src/main/resources/OSGI-INF/components.xml). Don't forget to provide the class that implements the commands as a service in the component definition, although no service interface has been implemented.
+
+To provide information for the `help` command of Gogo, the Gogo runtime package provides the annotation `@Descriptor`, that can be used for both, methods and parameters. The following example shows the usage of the annotation:
+
+```java
+@Descriptor("scans for devices with a specific driver")
+public void scanForDevices(@Descriptor("the driver id") String driverId) {
+	// method implementation
+}
+```
