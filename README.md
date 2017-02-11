@@ -14,6 +14,7 @@ A short description can also be accessed directly from the gogo shell by typing 
 | read | Reads the value of the specified channel | `<channelId>` |
 | scanForChannels | Scans for channels of a specific device | `<deviceAddress> [<settings>]` |
 | scanForDevices | Scans for devices with a specific driver | `<driverId> [<settings>]` |
+| write | Writes the value of the specified channel | `<channelId> <value>` |
 
 Please note that parameters like settings may be driver or device specific. As the channels configuration may
 be set in the `channels.xml` file, no commands for editing the configuration (e.g. adding a device) are included.
