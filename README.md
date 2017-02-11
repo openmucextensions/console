@@ -10,5 +10,7 @@ A short description can also be accessed directly from the gogo shell by typing 
 |:--------------|:----------------------------|:-----------------|
 | drivers | Shows the ids of all running OpenMUC drivers | - |
 | scanForDevices | Scans for devices with a specific driver | `<driverId> [<settings>]` |
+| config | Shows the actual OpenMUC configuration | - |
+| addDriver | Adds the specified driver to the OpenMUC configuration | `<driverId>` |
 
 Please note that parameters like settings may be driver or device specific.
