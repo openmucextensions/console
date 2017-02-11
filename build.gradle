@@ -26,9 +26,8 @@ dependencies {
 jar {
   manifest {
     name = "OpenMUC Gogo Console Commands"
-    version = "0.1.0"
+    version = "1.0.0"
     symbolicName = "org.openmucextensions.console";
-    // instruction 'Bundle-Activator', 'org.openmucextensions.console.Activator'
     instruction 'Bundle-ClassPath', '.'
     instruction 'Import-Package', '*'
     instruction 'Export-Package', ''

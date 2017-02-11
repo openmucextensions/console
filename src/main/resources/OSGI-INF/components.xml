@@ -2,8 +2,14 @@
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="org.openmucextensions.console" immediate="true">
    <implementation class="org.openmucextensions.console.ConsoleCommands"/>
    <property name="osgi.command.scope" type="String" value="openmuc"/>
-<property name="osgi.command.function" value="drivers">
-
+<property name="osgi.command.function">
+drivers
+scanForDevices
+config
+scanForChannels
+channels
+read
+write
 </property>
 <service>
    <provide interface="org.openmucextensions.console.ConsoleCommands"/>
