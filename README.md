@@ -9,3 +9,6 @@ A short description can also be accessed directly from the gogo shell by typing 
 | Command | Description | Parameters |
 |:--------------|:----------------------------|:-----------------|
 | drivers | Shows the ids of all running OpenMUC drivers | - |
+| scanForDevices | Scans for devices with a specific driver | `<driverId> [<settings>]` |
+
+Please note that parameters like settings may be driver or device specific.
