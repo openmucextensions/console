@@ -105,7 +105,7 @@ public class ConsoleCommands {
 			
 			printLine();
 			for (ChannelScanInfo channelScanInfo : infos) {
-				System.out.println("address: " + channelScanInfo.getChannelAddress() + ", description: " + channelScanInfo.getDescription());
+				System.out.println("address: " + channelScanInfo.getChannelAddress() + ", description: " + channelScanInfo.getDescription() + ", meta: " + channelScanInfo.getMetaData());
 			}
 			
 			System.out.println(infos.size() + " channel(s) found");
