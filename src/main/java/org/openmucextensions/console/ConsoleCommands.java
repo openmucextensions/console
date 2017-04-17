@@ -1,5 +1,11 @@
 package org.openmucextensions.console;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +29,7 @@ import org.openmuc.framework.data.ShortValue;
 import org.openmuc.framework.data.StringValue;
 import org.openmuc.framework.dataaccess.Channel;
 import org.openmuc.framework.dataaccess.DataAccessService;
+import org.openmuc.framework.dataaccess.DataLoggerNotAvailableException;
 import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -235,6 +242,61 @@ public class ConsoleCommands {
 		} else {
 			System.out.println("Channel " + channelId + " not found");
 		}
+		
+	}
+	
+	@Descriptor("exports logged values of a specific channel to a text file")
+	public void exportvalues(@Descriptor("the channel id") String channelId, @Descriptor("the start time with format yyyy-MM-dd HH:mm:ss") String startTimeString, @Descriptor("the start time with format yyyy-MM-dd HH:mm:ss") String endTimeString, @Descriptor("the export filename") String filename) {
+		
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			Date startTime = format.parse(startTimeString);
+			Date endTime = format.parse(endTimeString);
+			
+			Channel channel = dataAccessService.getChannel(channelId);
+			if(channel!=null) {
+				List<Record> records = channel.getLoggedRecords(startTime.getTime(), endTime.getTime());
+				System.out.println("Found " + records.size() + " record(s) for channel, creating export file...");
+				
+				if(filename!=null) {
+					
+					BufferedWriter writer = null;
+					try {
+						writer = new BufferedWriter(new FileWriter(filename));
+						
+						writer.write("channelId,timestamp,value,flag");
+						writer.newLine();
+						
+						for (Record record : records) {
+							String timestamp = format.format(new Date(record.getTimestamp()));
+							writer.write(channelId + "," + timestamp + "," + record.getValue().toString() + "," + record.getFlag().toString());
+							writer.newLine();
+						}
+						
+						writer.flush();
+						
+					} finally {
+						if(writer!=null) writer.close();
+					}
+					
+					System.out.println("Export finished successfully");
+					
+				} else {
+					System.out.println("Please specify a valid filename");
+				}
+				
+			} else {
+				System.out.println("The channel " + channelId + " could not be found");
+			}
+			
+		} catch (ParseException e) {
+			System.out.println("Error parsing start or end time. Correct format is yyyy-MM-dd HH-mm-ss");
+		} catch (DataLoggerNotAvailableException e) {
+			System.out.println("Error while retrieving data: " + e.getMessage());
+		} catch (IOException e) {
+			System.out.println("Error while retrieving data: " + e.getMessage());
+		}
+		
 		
 	}
 	
